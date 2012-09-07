@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+if(! open INPUTFILE,'<',"sample"){
+    die "Cannot find file srcfiles: $!";
+    }
+
+
+@input = <INPUTFILE>;
+$ii = 0;
+$jj =0;
+@itr = qw/100 1000 1000000/;
+
+
+foreach $iterations(@itr){
+if(! open OUTPUTFILE,'>',"largesamples.".$jj){
+    die "Cannot create file test2:$!";
+    }
+$jj++;
+while($ii<$iterations){
+foreach(@input)
+{
+    print OUTPUTFILE "$_";
+    }
+   $ii++;
+print OUTPUTFILE "\n";
+}
+}
