@@ -4,4 +4,9 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 	</section>
+<<<<<<< HEAD
+=======
+	<section name="NewWizardAction">
+	</section>
+>>>>>>> ec9653f37456fd101806414ba14a4d5214c11f6e
 </section>

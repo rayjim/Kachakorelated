@@ -12,6 +12,7 @@
 		<list key="textEntries">
 		</list>
 	</section>
+<<<<<<< HEAD
 	<section name="ShowViewDialog">
 		<item value="308" key="DIALOG_WIDTH"/>
 		<item value="org.eclipse.jdt.ui.SourceView" key="ShowViewDialog.STORE_SELECTED_VIEW_ID"/>
@@ -23,15 +24,21 @@
 			<item value="org.eclipse.jdt.ui.java"/>
 		</list>
 	</section>
+=======
+>>>>>>> ec9653f37456fd101806414ba14a4d5214c11f6e
 	<section name="ImportExportAction">
 		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
 			<item value="org.eclipse.team.cvs.ui.importWizards"/>
 			<item value="org.eclipse.egit.ui.internal.clone.gitclonecategory"/>
+<<<<<<< HEAD
 			<item value="org.eclipse.m2e"/>
 			<item value="org.eclipse.team.svn.ui.repository"/>
 			<item value="org.tigris.subversion.subclipse.ui.svn"/>
+=======
+			<item value="org.eclipse.team.svn.ui.repository"/>
+>>>>>>> ec9653f37456fd101806414ba14a4d5214c11f6e
 			<item value="org.eclipse.team.ui.importWizards"/>
 		</list>
 	</section>

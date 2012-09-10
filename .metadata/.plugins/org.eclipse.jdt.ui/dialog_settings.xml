@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+<<<<<<< HEAD
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="true" key="group_libraries"/>
 		<item value="false" key="linkWithEditor"/>
@@ -13,4 +14,8 @@
 	</section>
 	<section name="quick_assist_proposal_size">
 	</section>
+=======
+	<section name="JavaElementSearchActions">
+	</section>
+>>>>>>> ec9653f37456fd101806414ba14a4d5214c11f6e
 </section>
