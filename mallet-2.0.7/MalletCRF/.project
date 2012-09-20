@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/cc</name>
-			<type>2</type>
-			<location>/Users/Ray/Documents/projects/mallet-2.0.7/src/cc</location>
-		</link>
-	</linkedResources>
 </projectDescription>

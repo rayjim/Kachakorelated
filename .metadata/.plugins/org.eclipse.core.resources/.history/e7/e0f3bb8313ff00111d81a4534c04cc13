@@ -1,0 +1,200 @@
+package org.kachako.ml.Segment;
+
+//All the delimit should be redefined later!!!!!!!!!
+
+import iitb.Utils.Options;
+
+import org.kachako.iitb.CRF.CRF;
+import iitb.CRF.FeatureGenerator;
+import iitb.Model.FeatureGenImpl;
+import org.kachako.ml.Segment.LabelMap;
+
+
+import java.io.IOException;
+import java.util.Map.Entry;
+import java.util.Properties;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.MapWritable;
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.SequenceFile;
+import org.apache.hadoop.io.SequenceFile.Reader;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.Writable;
+
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class LeastSquaresMapper extends Mapper<Text, Text, NullWritable, MapWritable> {
+	protected MapWritable weightMap = new MapWritable();
+	protected MapWritable diffMap = new MapWritable();
+	private double stepSize = 0.00000025;
+	 String inName;
+	    String outDir;
+	    String baseDir="";
+	    int nlabels = 7; // this value will be changed after specific implemtation 
+	    double[] lambda;
+	    String delimit=" \t"; // used to define token boundaries:ray
+	    
+	    String tagDelimit="|"; // seperator between tokens and tag number:ray
+	    String impDelimit=","; // delimiters to be retained for tagging redefined later:ray
+	    String groupDelimit=null;
+
+	    boolean confuseSet[]=null;
+	    boolean validate = false; 
+	    String mapTagString = null;
+	    String smoothType = "";
+	        
+	    String modelArgs = "";
+	    String featureArgs = "";
+	    String modelGraphType = "naive";
+
+	    LabelMap labelMap;
+	    Options options;
+
+	    CRF crfModel;
+	    FeatureGenImpl featureGen;
+	    boolean firstItr;
+	   
+	    public FeatureGenerator featureGenerator() {return (FeatureGenerator) featureGen;}
+	@Override
+	public void setup(Context context) throws IOException, InterruptedException{
+		
+		delimit = ",\t/ -():.'?#'&_\"";   // redefined later
+		
+		Configuration conf = context.getConfiguration();
+		stepSize = conf.getFloat("sdm.step.size", (float)stepSize);
+		String weightFile = conf.get("weight.file");
+		firstItr = conf.getBoolean("itrNum", true);
+		if(weightFile!=null){
+				FileSystem fs = FileSystem.get(conf);
+				@SuppressWarnings("deprecation")
+				Reader reader = new SequenceFile.Reader(fs, new Path(weightFile),conf);
+				try{
+					NullWritable key = NullWritable.get();
+					reader.next(key,weightMap);
+				}finally{
+					
+					reader.close();
+				}
+		
+		}
+		
+		
+		//lambda = new double[featureGen.numFeatures()];
+		
+		
+	}
+	@Override
+	public void map(Text key, Text value, Context context)
+	throws IOException, InterruptedException
+	{
+		
+		PseudoBuffer tin = new PseudoBuffer(value.toString(),"\n");
+		String rawLine;
+		labelMap = new LabelMap();
+		options = new Options();
+		double[]featureWts;
+	
+		
+		
+		
+		TrainData trainData = DataCruncher.readTagged(nlabels,tin,delimit,tagDelimit,impDelimit,labelMap);
+		AlphaNumericPreprocessor.preprocess(trainData,nlabels);
+		try {
+			allocModel();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+			
+				if(firstItr)
+				{
+				try {
+					featureGen.train(trainData);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 featureWts = crfModel.train((iitb.CRF.DataIter) trainData);
+				}
+				else
+				{
+					try {
+						lambda = featureGen.trainWt(trainData,weightMap,crfModel);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					 featureWts = crfModel.train((iitb.CRF.DataIter) trainData,lambda,true,null);
+					
+				}
+			
+		
+		//featureGen.writeMap(featureWts,weightMap);
+		
+		// The following part is saved for later adjustment
+		
+	//	crfModel.write("crf");
+		//featureGen.write("features");
+
+		//if (options.getProperty("showModel") != null) {
+		// 
+				
+	   //featureGen.displayModel(featureWts);
+		//featureGen.writeDiffMap(featureWts, weightMap, diffMap);
+		featureGen.writeMap(featureWts, weightMap);
+		   
+		//}
+		
+		
+		
+	//	 context.write(key, value);
+
+}
+			   @Override
+		       public void cleanup(Context context) throws IOException,InterruptedException {
+				 /*  if(false)
+				   {
+				   
+				  
+				   for (Entry<Writable, Writable> entry : weightMap.entrySet()) {
+			            Text word = (Text) entry.getKey();
+			            DoubleArrayWritable featureArray = (DoubleArrayWritable) entry.getValue();
+			            DoubleWritable[] featureWts = (DoubleWritable[])featureArray.toArray();
+			            System.out.println(word.toString()+"  "+featureWts[0].toString()+" diff "+featureWts[1].toString()+" Counter: "+featureWts[2].toString());
+			        }
+				   
+				   
+				   
+				   }*/
+				   
+			        context.write(NullWritable.get(), weightMap);
+			       // System.out.println("************this is the end***************");
+		   }
+			   
+			   public void  allocModel() throws Exception {
+			    	// add any code related to dependency/consistency amongst paramter
+			    	// values here..
+				   /*
+			    	if (modelGraphType .equals("semi-markov")) {
+			    	    if(false){//if (options.getInt("debugLvl") > 1) {
+			    		Util.printDbg("Creating semi-markov model");
+			    	    }
+			    	    NestedFeatureGenImpl nfgen = new NestedFeatureGenImpl(nlabels,options);
+			    	    featureGen = nfgen;
+			    	    crfModel = new NestedCRF(featureGen.numStates(),nfgen,options);
+			    	} else */
+			    	{
+			    	    featureGen = new FeatureGenImpl(modelGraphType, nlabels);
+			    	    crfModel=new CRF(featureGen.numStates(), featureGen,options);
+			            }
+			        }
+		
+	}
+
+

@@ -1,0 +1,12 @@
+package org.kachako.ml.Segment;
+
+/***************************
+ * This class server as a  
+ * a saver to Mapwritable
+ * 
+ * ***********************/
+public class FeatureToMap {
+
+	 
+	
+}

@@ -10403,3 +10403,57 @@ java.library.path = .:/Library/Java/Extensions:/System/Library/Java/Extensions:/
 
 !ENTRY org.eclipse.osgi 2 1 2012-09-14 15:01:49.016
 !MESSAGE NLS unused message: MenuIconsPreferencePage.default in: org.tigris.subversion.subclipse.ui.messages
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2012-09-15 17:59:38.528
+!MESSAGE Failed to open search index.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2012-09-15 17:59:39.975
+!MESSAGE Error while extracting name and version from file: /Users/Ray/Documents/projects/kachakorelated/hadoop-0.22.0/lib/guava-r09.jar
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2012-09-20 13:07:18.890
+!MESSAGE Extracing jar information failed with exception.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2012-09-20 13:07:19.172
+!MESSAGE Extracing jar information failed with exception.
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.239
+!MESSAGE Invalid ZIP archive: LICENSES [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.240
+!MESSAGE Invalid ZIP archive: Makefile [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.459
+!MESSAGE Invalid ZIP archive: LICENSES [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.467
+!MESSAGE Invalid ZIP archive: Makefile [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.522
+!MESSAGE Invalid ZIP archive: LICENSES [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.523
+!MESSAGE Invalid ZIP archive: Makefile [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.693
+!MESSAGE Invalid ZIP archive: LICENSES [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.693
+!MESSAGE Invalid ZIP archive: Makefile [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.703
+!MESSAGE Invalid ZIP archive: LICENSES [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:21.703
+!MESSAGE Invalid ZIP archive: Makefile [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:22.042
+!MESSAGE Invalid ZIP archive: LICENSES [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:22.042
+!MESSAGE Invalid ZIP archive: Makefile [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:23.309
+!MESSAGE Invalid ZIP archive: LICENSES [in kachakoCRF1.0]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-09-20 13:07:23.309
+!MESSAGE Invalid ZIP archive: Makefile [in kachakoCRF1.0]
